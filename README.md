@@ -32,7 +32,7 @@ The Marketplace installs `infuse-dashboard-cards.js` automatically, registers a 
 Both components are bundled in a single JavaScript module:
 
 - `custom:infuse-now-playing-card`: single-device cover, title, state (including Paused), progress and optional status/progress/remaining tiles. Its visual editor includes a searchable media-player entity picker and switches for each tile.
-- `custom:infuse-household-card`: overview of multiple Infuse devices.
+- `custom:infuse-household-card`: overview of multiple Infuse devices with a visual editor for selecting, adding, removing and reordering players, renaming the dashboard card, and assigning optional external profile sensors to individual devices.
 
 ### Single-device card
 
@@ -55,6 +55,17 @@ entities:
   - media_player.apple_tv_infuse_player
   - media_player.infuse_schlafzimmer
 ```
+
+### Household card — visual editor
+
+You no longer need to write an `entities` YAML list to set up the Household card. In Home Assistant, add **Infuse Household** to a dashboard or edit an existing instance and use the **visual editor**:
+
+1. Enter an optional **card heading**.
+2. Choose each Infuse player from Home Assistant's searchable **Media player** picker.
+3. Use **Add a device** to include additional Apple TVs. The **↑ / ↓** controls adjust display order; **×** removes a player. At least one player must remain.
+4. Optionally choose an **external profile sensor** for each player. This is a separately configured HA sensor, not data returned by Infuse's API.
+
+Previously configured YAML remains valid. The editor preserves other options and any external profile associations when devices are reordered, added or removed. Duplicate players are prevented. Media-player entities and playback history are unaffected by editor changes.
 
 ### Manual installation
 
