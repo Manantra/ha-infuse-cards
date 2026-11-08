@@ -63,7 +63,7 @@ You no longer need to write an `entities` YAML list to set up the Household card
 1. Enter an optional **card heading**.
 2. Choose each Infuse player from Home Assistant's searchable **Media player** picker.
 3. Use **Add a device** to include additional Apple TVs. The **↑ / ↓** controls adjust display order; **×** removes a player. At least one player must remain.
-4. Optionally choose an **external profile sensor** for each player. This is a separately configured HA sensor, not data returned by Infuse's API.
+4. Optionally choose an **external profile sensor** for each player. Click/tap the **?** icon (or hover over it) to see what this option means and when it can be used. The sensor must already exist in Home Assistant and have the actual profile name as its state; Infuse's local Now Playing API does not expose the active profile. An Apple TV user is not necessarily the same as an Infuse profile. Leave it blank if you do not have a suitable sensor.
 
 Previously configured YAML remains valid. The editor preserves other options and any external profile associations when devices are reordered, added or removed. Duplicate players are prevented. Media-player entities and playback history are unaffected by editor changes.
 
