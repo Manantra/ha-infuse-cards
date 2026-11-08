@@ -2,7 +2,28 @@
 
 Optional, read-only custom dashboard cards for the [Infuse Now Playing Home Assistant integration](https://github.com/Manantra/ha-infuse).
 
-![Infuse play mark](assets/infuse-mark.svg)
+## Preview
+
+These are **screenshots of the real dashboard card JavaScript**, rendered with fictional example media and original illustrated placeholder artwork. They are not taken from a user's Home Assistant installation.
+
+### Single-device card
+
+<img src="assets/previews/single-device.png" alt="Infuse single-device dashboard card showing a paused TV episode, series title, progress bar, remaining time and three optional status tiles" width="540">
+
+*`custom:infuse-now-playing-card` — paused playback, artwork, title and configurable information tiles.*
+
+### Multiple devices
+
+<img src="assets/previews/multiple-devices.png" alt="Infuse household dashboard card showing three Apple TV devices, one playing, one paused and one idle, with posters and progress bars" width="780">
+
+*`custom:infuse-household-card` — multiple independent Infuse devices in one dashboard.*
+
+<details>
+<summary>How the preview images were created</summary>
+
+The [HTML preview fixture](tests/preview-fixture.html) loads the actual distributed card JavaScript and supplies sample Home Assistant states. The sample series, titles and poster illustrations are fictional. The screenshots were taken in headless Chrome at 2× scale. To regenerate them, run `./scripts/generate-previews.sh` from the repository root with Chrome or Chromium installed.
+
+</details>
 
 **Home Assistant 2026.11+**: install this repository as category **Dashboard** in **Settings → Marketplace**. On **2026.10 or older**, add it in HACS as a **Dashboard** (formerly Lovelace/plugin) custom repository. This repository includes `hacs.json` for both stores.
 

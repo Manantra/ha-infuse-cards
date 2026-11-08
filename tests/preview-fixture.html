@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Infuse dashboard card screenshot fixtures</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #0d1420; color: #f5f6fa; font-family: system-ui, sans-serif; }
+    .stage { margin: 0 auto; padding: 24px; }
+    .stage.single { width: 540px; }
+    .stage.household { width: 780px; }
+  </style>
+</head>
+<body>
+  <main id="stage"></main>
+  <script src="../dist/infuse-dashboard-cards.js"></script>
+  <script>
+    // Reproducible fictional example states; no user's Home Assistant data.
+    function poster(kind) {
+      const northern = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#162b56"/><stop offset="0.46" stop-color="#346a88"/><stop offset="0.8" stop-color="#bd684b"/><stop offset="1" stop-color="#171e35"/></linearGradient>
+            <radialGradient id="moon"><stop stop-color="#fff8d0" stop-opacity=".95"/><stop offset=".7" stop-color="#baf0dc" stop-opacity=".52"/><stop offset="1" stop-color="#baf0dc" stop-opacity="0"/></radialGradient>
+            <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a1c8c9"/><stop offset="1" stop-color="#324969"/></linearGradient>
+          </defs>
+          <rect width="900" height="1200" fill="url(#sky)"/>
+          <path d="M-70 330 Q150 80 450 250 T970 140 L970 330 Q630 225 450 440 Q200 320 -70 470Z" fill="#7cdecf" opacity=".32"/>
+          <path d="M-100 230 Q160 45 520 188 T980 64" fill="none" stroke="#81ffcc" stroke-width="70" opacity=".15"/>
+          <circle cx="678" cy="244" r="158" fill="url(#moon)"/><circle cx="678" cy="244" r="58" fill="#f6e7c2"/>
+          <g fill="#f6f4e8" opacity=".75"><circle cx="100" cy="170" r="3"/><circle cx="200" cy="290" r="2"/><circle cx="360" cy="130" r="3"/><circle cx="480" cy="240" r="2"/><circle cx="830" cy="120" r="3"/><circle cx="785" cy="420" r="2"/><circle cx="230" cy="420" r="2"/></g>
+          <path d="M-60 830 L140 540 L290 745 L470 490 L660 745 L795 580 L970 820 L970 1200 L-60 1200Z" fill="#1b334a"/>
+          <path d="M-60 865 L140 540 L290 745 L470 490 L660 745 L795 580 L970 820 L970 1200 L-60 1200Z" fill="url(#snow)" opacity=".7"/>
+          <path d="M90 610 L140 540 L230 660 L168 639 L144 589 L125 626Z M390 620 L470 490 L555 610 L495 573 L461 543 L438 599Z M747 645 L795 580 L855 655 L805 634 L786 607Z" fill="#e6eef1" opacity=".88"/>
+          <path d="M-60 910 Q220 855 440 920 T970 900 L970 1200 L-60 1200Z" fill="#0a2234" opacity=".74"/>
+          <path d="M0 1000 Q340 945 610 1040 T900 1030 V1200 H0Z" fill="#101c32"/>
+        </svg>`;
+      const urban = `
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2=".8" y2="1"><stop stop-color="#262044"/><stop offset=".5" stop-color="#734060"/><stop offset="1" stop-color="#eb9d62"/></linearGradient>
+            <linearGradient id="windows" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffd89a"/><stop offset="1" stop-color="#edb16a"/></linearGradient>
+          </defs>
+          <rect width="900" height="1200" fill="url(#sky)"/>
+          <circle cx="600" cy="276" r="148" fill="#fbc48e" opacity=".36"/><circle cx="600" cy="276" r="86" fill="#f9d2a5" opacity=".92"/>
+          <rect x="0" y="510" width="200" height="700" fill="#252b47"/><rect x="180" y="370" width="160" height="830" fill="#242642"/><rect x="325" y="610" width="245" height="590" fill="#242b43"/><rect x="555" y="455" width="130" height="745" fill="#272a45"/><rect x="675" y="560" width="225" height="640" fill="#1e243a"/>
+          <g fill="url(#windows)" opacity=".7">
+            <path d="M45 560h30v40H45zM114 560h30v40h-30zM45 660h30v40H45zM115 765h30v40h-30zM225 420h29v44h-29zM282 505h29v44h-29zM225 605h29v44h-29zM282 703h29v44h-29zM380 650h35v55h-35zM464 705h35v55h-35zM590 510h25v40h-25zM590 625h25v40h-25zM735 610h34v45h-34zM812 695h34v45h-34zM735 785h34v45h-34z"/>
+          </g>
+          <path d="M0 1050 L900 1000 V1200 H0Z" fill="#101d30"/>
+          <path d="M0 1060L900 1010" stroke="#f7b17d" stroke-width="4" opacity=".5"/>
+        </svg>`;
+      return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(kind === 'urban' ? urban : northern);
+    }
+    const northern = poster('northern'), urban = poster('urban');
+    const states = {
+      'media_player.apple_tv_wohnzimmer_infuse': {
+        state: 'playing', attributes: { friendly_name: 'Apple TV Wohnzimmer', media_title: 'Das Licht hinter dem Berg', media_series_title: 'Nordlicht', media_season: 1, media_episode: 5, media_duration: 2520, media_position: 1493, entity_picture: northern }
+      },
+      'media_player.apple_tv_schlafzimmer_infuse': {
+        state: 'paused', attributes: { friendly_name: 'Apple TV Schlafzimmer', media_title: 'Späte Begegnung', media_series_title: 'Stadtlichter', media_season: 2, media_episode: 3, media_duration: 2860, media_position: 1780, entity_picture: urban }
+      },
+      'media_player.apple_tv_gastezimmer_infuse': {
+        state: 'idle', attributes: { friendly_name: 'Apple TV Gästezimmer' }
+      },
+    };
+    const view = new URLSearchParams(location.search).get('view') || 'single';
+    const target = document.getElementById('stage');
+    target.className = `stage ${view === 'single' ? 'single' : 'household'}`;
+    const component = document.createElement(view === 'single' ? 'infuse-now-playing-card' : 'infuse-household-card');
+    if (view === 'single') {
+      component.setConfig({entity: 'media_player.apple_tv_schlafzimmer_infuse', title: 'Apple TV Schlafzimmer'});
+    } else {
+      component.setConfig({entities: Object.keys(states), title: 'Infuse Zuhause'});
+    }
+    target.appendChild(component);
+    component.hass = {language: 'de', states};
+    const bounds = component.getBoundingClientRect();
+    document.documentElement.setAttribute('data-card-height', Math.ceil(bounds.height));
+  </script>
+</body></html>
