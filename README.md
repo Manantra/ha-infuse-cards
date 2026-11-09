@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> **Project moved into Infuse Now Playing for Home Assistant (v0.2.11+).** Following the HACS maintainers' review guidance, **both Lovelace cards are now bundled and automatically registered by [Manantra/ha-infuse](https://github.com/Manantra/ha-infuse)**. This separate repository is kept for existing installations and historical releases only; **do not install it for new setups**. For migration, upgrade the main integration, remove this old HACS/Marketplace cards plugin and any leftover legacy dashboard resource URLs, then restart Home Assistant. Your card types and YAML configurations do not change. Full steps: [Bundled cards and migration](https://github.com/Manantra/ha-infuse#migrating-from-the-former-separate-cards-repository).
+
 # Infuse Dashboard Cards
 
 Optional, read-only custom dashboard cards for the [Infuse Now Playing Home Assistant integration](https://github.com/Manantra/ha-infuse).
