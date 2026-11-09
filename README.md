@@ -1,5 +1,7 @@
 > [!IMPORTANT]
-> **Project moved into Infuse Now Playing for Home Assistant (v0.2.11+).** Following the HACS maintainers' review guidance, **both Lovelace cards are now bundled and automatically registered by [Manantra/ha-infuse](https://github.com/Manantra/ha-infuse)**. This separate repository is kept for existing installations and historical releases only; **do not install it for new setups**. For migration, upgrade the main integration, remove this old HACS/Marketplace cards plugin and any leftover legacy dashboard resource URLs, then restart Home Assistant. Your card types and YAML configurations do not change. Full steps: [Bundled cards and migration](https://github.com/Manantra/ha-infuse#migrating-from-the-former-separate-cards-repository).
+> **Migration bridge v0.1.4 — the final update of the separate cards package.** Both cards are now included with [Infuse Now Playing](https://github.com/Manantra/ha-infuse) v0.2.11+. **Existing users should update this old cards package to v0.1.4**: its JavaScript now automatically loads the up-to-date cards from the installed integration. If the integration hasn't been upgraded yet, the bridge falls back to the original cards so existing dashboards remain functional. No dashboard YAML changes are needed. **This is not a new standalone card release**; future features and fixes are shipped through the Infuse integration only.
+>
+> To fully finish the transition, uninstall the separate cards plugin and remove its old dashboard resource, then reload the integration. This cleanup is deliberately not automated, because HACS/Marketplace owns the plugin and its resource registration. See [migration steps](https://github.com/Manantra/ha-infuse#migrating-from-the-former-separate-cards-repository). For **new installations**, install only `Manantra/ha-infuse` from the HACS / Marketplace integration catalog.
 
 # Infuse Dashboard Cards
 
@@ -28,9 +30,18 @@ The [HTML preview fixture](tests/preview-fixture.html) loads the actual distribu
 
 </details>
 
-**Home Assistant 2026.11+**: install this repository as category **Dashboard** in **Settings → Marketplace**. On **2026.10 or older**, add it in HACS as a **Dashboard** (formerly Lovelace/plugin) custom repository. This repository includes `hacs.json` for both stores.
+### Existing users: how the bridge works
 
-The Marketplace installs `infuse-dashboard-cards.js` automatically, registers a versioned dashboard resource at `/local/community/ha-infuse-cards/infuse-dashboard-cards.js`, and keeps the card updated. An earlier manual copy to `/config/www/infuse-now-playing-card.js` is **not updated** by the Marketplace; remove its old `/local/infuse-now-playing-card.js` resource when migrating to the managed package, so an old JavaScript module cannot register the card before the new version does. Your existing dashboard YAML does not change.
+1. Update the **Infuse Now Playing integration** to v0.2.11 or newer and restart Home Assistant.
+2. Update the existing separate **Infuse Dashboard Cards** plugin to **v0.1.4**. Its existing `/hacsfiles/ha-infuse-cards/...` or `/local/community/ha-infuse-cards/...` resource still loads, but the new bridge imports the up-to-date cards from `/api/infuse/cards/infuse-dashboard-cards.js`.
+3. Refresh your browser/app frontend. **Your existing dashboards now run the cards shipped with the integration**, even while the old plugin is still installed. Updating the Infuse integration delivers new card features without future releases from this legacy repository.
+4. **Optional but recommended cleanup:** uninstall the old cards plugin in HACS/Marketplace, remove any leftover old card resource registrations in Settings → Dashboards → Resources, then reload the Infuse integration (or restart Home Assistant). The integration will now register the bundled resource itself. Do not remove any unrelated resources.
+
+If the integration bundle is not available (e.g. an older integration version), the bridge continues to render the original two cards from its built-in fallback. In that case, upgrade the main integration to enable continuous card updates. This compatibility fallback does **not** override any newer card elements already registered.
+
+**Automatic uninstall isn't safe:** HACS/Marketplace manages installed repositories and their JavaScript resource entries; this plugin cannot quietly remove its own installation or rewrite Home Assistant's stored dashboard configuration. The bridge deliberately only imports the integration's JavaScript and leaves your HACS/database state untouched.
+
+For **new users**, do not add this repository as a custom HACS plugin. Search for **Infuse Now Playing** in the integration catalog and install that repository instead.
 
 Both components are bundled in a single JavaScript module:
 
@@ -72,6 +83,6 @@ Previously configured YAML remains valid. The editor preserves other options and
 
 ### Manual installation
 
-Copy `dist/infuse-dashboard-cards.js` to `/config/www/infuse-dashboard-cards.js` and add `/local/infuse-dashboard-cards.js` as a JavaScript-module dashboard resource. Prefer the Marketplace or HACS to receive updates automatically.
+New installs should instead use the [Infuse Now Playing integration](https://github.com/Manantra/ha-infuse), which bundles and registers both cards. This legacy package and its distribution file are provided for existing users and fallback compatibility only.
 
-**Source and release process:** the canonical integration repository is [Manantra/ha-infuse](https://github.com/Manantra/ha-infuse). The JavaScript source files in `examples/www/` are copied from there when publishing a new card release, then concatenated to `dist/infuse-dashboard-cards.js`. Both repositories retain the same `infuse-now-playing-card` and `infuse-household-card` element names for backward compatibility.
+**Source and final release process:** the canonical integration repository is [Manantra/ha-infuse](https://github.com/Manantra/ha-infuse). The frozen JavaScript sources under `examples/www/` exist solely as a fallback for the migration bridge; they no longer receive feature updates. `scripts/build-migration-bridge.py` generates the final `dist/infuse-dashboard-cards.js`, which imports the bundled integration card and falls back only if the import is unavailable. Both existing card element names remain unchanged.

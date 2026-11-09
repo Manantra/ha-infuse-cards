@@ -1,3 +1,15 @@
+/*
+ * Infuse Dashboard Cards: final legacy HACS migration bridge (v0.1.4).
+ * Both cards now ship with the Infuse Now Playing integration (v0.2.11+).
+ * This legacy resource dynamically loads the bundled integration version.
+ * Old local cards are used ONLY if the integration's card URL is unavailable.
+ * Do not register another resource, delete HACS entries or modify dashboards.
+ */
+try {
+  await import("/api/infuse/cards/infuse-dashboard-cards.js");
+} catch (error) {
+  console.warn("[Infuse Cards] Bundled cards unavailable; using the legacy fallback. " +
+    "Update Infuse Now Playing to v0.2.11+ to receive card updates with the integration.", error);
 class InfuseNowPlayingCard extends HTMLElement {
   constructor() { super(); this.attachShadow({mode:"open"}); }
   setConfig(config) {
@@ -307,3 +319,5 @@ if(!customElements.get("infuse-household-card-editor"))customElements.define("in
 if(!customElements.get("infuse-household-card")) customElements.define("infuse-household-card",InfuseHouseholdCard);
 window.customCards=window.customCards||[];
 if(!window.customCards.some(x=>x.type==="infuse-household-card"))window.customCards.push({type:"infuse-household-card",name:"Infuse Household",description:"Multiple independent Infuse device sessions"});
+
+}

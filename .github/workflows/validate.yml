@@ -20,7 +20,8 @@ jobs:
           node --check examples/www/infuse-now-playing-card.js
           node --check examples/www/infuse-household-card.js
           node --test tests/test_now_playing_card.mjs tests/test_household_card.mjs
-          cat examples/www/infuse-now-playing-card.js examples/www/infuse-household-card.js | cmp - dist/infuse-dashboard-cards.js
+          python3 scripts/build-migration-bridge.py --check
+          node --test tests/test_migration_bridge.mjs
       - name: Check real-card preview gallery assets
         run: |
           test -s assets/previews/single-device.png
