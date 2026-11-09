@@ -27,8 +27,8 @@ jobs:
           test -s assets/previews/single-device.png
           test -s assets/previews/multiple-devices.png
           test -s tests/preview-fixture.html
-          grep -q 'assets/previews/single-device.png' README.md
-          grep -q 'assets/previews/multiple-devices.png' README.md
+          grep -Fq 'src="https://raw.githubusercontent.com/Manantra/ha-infuse-cards/main/assets/previews/single-device.png"' README.md
+          grep -Fq 'src="https://raw.githubusercontent.com/Manantra/ha-infuse-cards/main/assets/previews/multiple-devices.png"' README.md
   marketplace:
     runs-on: ubuntu-latest
     steps:

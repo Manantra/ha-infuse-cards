@@ -13,13 +13,13 @@ These are **screenshots of the real dashboard card JavaScript**, rendered with f
 
 ### Single-device card
 
-<img src="assets/previews/single-device.png" alt="Infuse single-device dashboard card showing a paused TV episode, series title, progress bar, remaining time and three optional status tiles" width="540">
+<img src="https://raw.githubusercontent.com/Manantra/ha-infuse-cards/main/assets/previews/single-device.png" alt="Infuse single-device dashboard card showing a paused TV episode, series title, progress bar, remaining time and three optional status tiles" width="540">
 
 *`custom:infuse-now-playing-card` — paused playback, artwork, title and configurable information tiles.*
 
 ### Multiple devices
 
-<img src="assets/previews/multiple-devices.png" alt="Infuse household dashboard card showing three Apple TV devices, one playing, one paused and one idle, with posters and progress bars" width="780">
+<img src="https://raw.githubusercontent.com/Manantra/ha-infuse-cards/main/assets/previews/multiple-devices.png" alt="Infuse household dashboard card showing three Apple TV devices, one playing, one paused and one idle, with posters and progress bars" width="780">
 
 *`custom:infuse-household-card` — multiple independent Infuse devices in one dashboard.*
 
